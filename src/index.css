@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Abar';
+  src: url('/fonts/AbarMidFaNum-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Abar';
+  src: url('/fonts/AbarMidFaNum-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Abar';
+  src: url('/fonts/AbarMidFaNum-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Abar';
+  src: url('/fonts/AbarMidFaNum-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-brand-accent: #eb644c;
+  --color-brand-accent-hover: #f17b66;
+  --color-brand-accent-subtle: rgba(235, 100, 76, 0.12);
+  --color-brand-accent-border: rgba(235, 100, 76, 0.35);
+  --color-brand-bg: #261c0b;
+  --color-brand-bg-deep: #181206;
+  --color-brand-surface: #2d2212;
+  --color-brand-surface-elevated: #392b17;
+  --color-brand-border: #4d3a20;
+  --color-brand-border-light: rgba(230, 222, 208, 0.15);
+  --color-brand-text: #e6ded0;
+  --color-brand-muted: #b4a899;
+  --color-brand-dim: #7a6e60;
+
+  color-scheme: dark;
+}
+
+/* Persian typography with Abar */
+html[lang="fa"] {
+  font-family: 'Abar', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-feature-settings: "ss01" on, "numr" on;
+}
+
+/* Latin typography with system sans-serif */
+html[lang="en"] {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-text);
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar in dark theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #181206;
+}
+::-webkit-scrollbar-thumb {
+  background: #4d3a20;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #eb644c;
+}
+
+/* Subtle focus indicators */
+*:focus-visible {
+  outline: 2px solid #eb644c;
+  outline-offset: 2px;
+}
+
+/* Motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

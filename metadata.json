@@ -1,0 +1,6 @@
+{
+  "name": "موسیقی نو در ایران — بروشور دیجیتال کنسرت",
+  "description": "بروشور تعاملی و دیجیتال کنسرت موسیقی نو در ایران؛ اجرای آثار علیرضا مشایخی | New Music in Iran - Interactive Concert Brochure",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
