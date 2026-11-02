@@ -25,6 +25,9 @@ export interface Artist {
   nameEn: string;
   roleFa: string;
   roleEn: string;
+  image: string;
+  altFa: string;
+  altEn: string;
   paragraphsFa: string[];
   paragraphsEn: string[];
   editorialNoteFa?: string;
@@ -259,6 +262,9 @@ export const brochureData = {
       nameEn: 'Alireza Mashayekhi',
       roleFa: 'آهنگساز',
       roleEn: 'Composer',
+      image: '/images/artists/alireza-mashayekhi.png',
+      altFa: 'پرتره استاد علیرضا مشایخی آهنگساز',
+      altEn: 'Portrait of composer Alireza Mashayekhi',
       tagsFa: ['پیشگام موسیقی معاصر', 'بنیان‌گذار گروه موسیقی تهران', 'استاد آهنگسازی'],
       tagsEn: ['Pioneer of Contemporary Music', 'Founder of Tehran Music Group', 'Master Composer'],
       paragraphsFa: [
@@ -286,6 +292,9 @@ export const brochureData = {
       nameEn: 'Amin Ghaffari',
       roleFa: 'سولیست ویولن و ویولا',
       roleEn: 'Violin and Viola Soloist',
+      image: '/images/artists/amin-ghaffari.png',
+      altFa: 'پرتره امین غفاری سولیست ویولن و ویولا',
+      altEn: 'Portrait of violin and viola soloist Amin Ghaffari',
       tagsFa: ['سولیست بین‌المللی', 'برگزیده مسابقات ژاپن و هنله', 'پژوهشگر و مدرس'],
       tagsEn: ['International Soloist', 'Japan World Winner & Henle Prize', 'Author & Educator'],
       paragraphsFa: [
@@ -319,6 +328,9 @@ export const brochureData = {
       nameEn: 'Arash Amini',
       roleFa: 'رهبر ارکستر',
       roleEn: 'Conductor',
+      image: '/images/artists/arash-amini.png',
+      altFa: 'پرتره آرش امینی رهبر ارکستر',
+      altEn: 'Portrait of conductor Arash Amini',
       tagsFa: ['رهبر ارکستر بین‌المللی', 'دانش‌آموخته فرانسه', 'عضو هیئت علمی'],
       tagsEn: ['International Conductor', 'French Conservatory Graduate', 'Academic & Faculty'],
       paragraphsFa: [
@@ -338,6 +350,9 @@ export const brochureData = {
       nameEn: 'Setareh Beheshti',
       roleFa: 'نوازندۀ ویولن، سرپرست کوارتت زهی نماد و عضو هیئت علمی دانشگاه تهران',
       roleEn: 'Violinist, Leader of Namad String Quartet, and Faculty Member at the University of Tehran',
+      image: '/images/artists/setareh-beheshti.png',
+      altFa: 'پرتره دکتر ستاره بهشتی نوازنده ویولن و سرپرست کوارتت نماد',
+      altEn: 'Portrait of violinist and Namad Quartet leader Setareh Beheshti',
       tagsFa: ['سرپرست کوارتت زهی نماد', 'عضو هیئت علمی دانشگاه تهران', 'نوازندۀ ویولن'],
       tagsEn: ['Leader of Namad Quartet', 'University of Tehran Faculty', 'Violinist'],
       paragraphsFa: [
@@ -346,8 +361,6 @@ export const brochureData = {
       paragraphsEn: [
         'Setareh Beheshti is among Iran’s most distinguished violinists and pedagogues, leader and first violinist of the Namad String Quartet, and faculty member at the College of Fine Arts, University of Tehran.',
       ],
-      editorialNoteFa: 'یادداشت نسخه بروشور منبع: «شاید به این عنوان چند سطری متن اضافه شود و شاید حذف شود.»',
-      editorialNoteEn: 'Source Brochure Editorial Note: "Perhaps a few lines will be added to this title, or it may be omitted."',
     },
     {
       id: 'farzan-farnea',
@@ -355,6 +368,9 @@ export const brochureData = {
       nameEn: 'Farzan Farnea',
       roleFa: 'نوازندۀ سازهای کوبه‌ای و سرپرست آنسامبل کاروان',
       roleEn: 'Percussionist and Director of Karavan Ensemble',
+      image: '/images/artists/farzan-farnia.png',
+      altFa: 'پرتره فرزان فرنیا نوازنده سازهای کوبه‌ای و سرپرست آنسامبل کاروان',
+      altEn: 'Portrait of percussionist and Karavan Ensemble director Farzan Farnea',
       tagsFa: ['سرپرست آنسامبل کاروان', 'دانش‌آموخته موتسارته‌ئوم سالزبورگ', 'رئیس انجمن ارف ایران'],
       tagsEn: ['Director of Karavan Ensemble', 'Mozarteum Salzburg Alumnus', 'President of Orff Iran'],
       paragraphsFa: [
@@ -496,6 +512,26 @@ export const brochureData = {
       { name: 'Amirabbas Setayeshgar', title: 'Senior Advisor & Deputy for Cultural-Artistic Affairs, Roudaki Foundation' },
       { name: 'Eshaq Shokri', title: 'CEO of Iran Music Association' },
     ],
+    emaratAyandeh: {
+      titleFa: 'عمارت آینده',
+      titleEn: 'Emarat Ayandeh',
+      subtitleFa: 'اکوسیستم هوش مصنوعی',
+      subtitleEn: 'AI Ecosystem',
+      membersFa: [
+        'سهراب حسینی',
+        'شیوا عاشوری',
+        'آرش برائی‌نژاد',
+        'امیر محمد فتحی',
+        'هلیا رضائی',
+      ],
+      membersEn: [
+        'Sohrab Hosseini',
+        'Shiva Ashouri',
+        'Arash Baraeenezhad',
+        'Amir Mohammad Fathi',
+        'Helia Rezaei',
+      ],
+    },
   },
 
   links: {

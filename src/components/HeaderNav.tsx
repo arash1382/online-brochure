@@ -83,8 +83,8 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
             className="flex items-center gap-2 text-start group cursor-pointer focus:outline-none"
             title={isEn ? 'Scroll to top' : 'بازگشت به ابتدای بروشور'}
           >
-            <div className="w-8 h-8 rounded bg-[#eb644c]/15 border border-[#eb644c]/40 flex items-center justify-center text-[#eb644c] font-bold text-xs tracking-wider transition-colors group-hover:bg-[#eb644c]/25">
-              <span>{isEn ? 'NM' : 'م‌ن'}</span>
+            <div className="w-8 h-8 rounded bg-[#eb644c]/15 border border-[#eb644c]/40 flex items-center justify-center text-[#eb644c] font-bold text-xs tracking-wider transition-colors group-hover:bg-[#eb644c]/25 overflow-hidden p-1">
+              <img src="/assets/فرم ویالن.svg" alt="Violin" className="w-full h-full object-contain" />
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-semibold text-[#e6ded0] tracking-wide leading-none group-hover:text-[#eb644c] transition-colors">

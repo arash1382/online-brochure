@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { brochureData } from '../data/brochureData';
-import { ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface ArtistsSectionProps {
   currentLang: 'fa' | 'en';
@@ -63,47 +63,47 @@ export const ArtistsSection: React.FC<ArtistsSectionProps> = ({ currentLang }) =
                 <button
                   type="button"
                   onClick={() => toggleBio(artist.id)}
-                  className="w-full p-4 sm:p-5 flex items-center justify-between text-start cursor-pointer hover:bg-[#392b17]/50 select-none transition-colors"
+                  className="w-full p-3 sm:p-5 flex items-stretch sm:items-center justify-between text-start cursor-pointer hover:bg-[#392b17]/50 select-none transition-colors gap-3 sm:gap-4"
                   aria-expanded={isExpanded}
                   aria-controls={`artist-bio-${artist.id}`}
                 >
-                  <div className="flex items-center gap-3 sm:gap-4 flex-1">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[#eb644c]/15 text-[#eb644c] flex items-center justify-center font-bold text-xs sm:text-sm shrink-0">
-                      <span>
-                        {isEn
-                          ? artist.nameEn
-                              .split(' ')
-                              .map((n) => n[0])
-                              .join('')
-                          : artist.nameFa.slice(0, 2)}
-                      </span>
+                  <div className="flex items-start sm:items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                    {/* Portrait Image (104px-124px width, 3:4 aspect ratio, local asset) */}
+                    <div className="w-[104px] sm:w-[116px] md:w-[124px] aspect-[3/4] rounded-lg sm:rounded-xl overflow-hidden border border-[#4d3a20] shadow-md shrink-0 bg-[#181206]">
+                      <img
+                        src={artist.image}
+                        alt={isEn ? artist.altEn : artist.altFa}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover object-top"
+                      />
                     </div>
-                    <div>
-                      <h3 className="text-sm sm:text-base font-bold text-[#e6ded0]">
+
+                    <div className="flex-1 min-w-0 py-0.5 sm:py-0">
+                      <h3 className="text-sm sm:text-base md:text-lg font-bold text-[#e6ded0]">
                         {isEn ? artist.nameEn : artist.nameFa}
                       </h3>
-                      <div className="text-[11px] sm:text-xs text-[#eb644c] font-medium mt-0.5">
+                      <div className="text-[11px] sm:text-xs text-[#eb644c] font-medium mt-1 leading-snug">
                         {isEn ? artist.roleEn : artist.roleFa}
                       </div>
+
+                      {/* Tags preview */}
+                      {(isEn ? artist.tagsEn : artist.tagsFa) && (
+                        <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-2.5">
+                          {(isEn ? artist.tagsEn : artist.tagsFa)?.map((tag, idx) => (
+                            <span
+                              key={idx}
+                              className="text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded bg-[#181206] text-[#b4a899] border border-[#4d3a20]/50"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 shrink-0">
-                    {/* Tags preview on sm/md screens */}
-                    {artist.tagsFa && (
-                      <div className="hidden sm:flex flex-wrap gap-1.5 justify-end max-w-xs">
-                        {(isEn ? artist.tagsEn : artist.tagsFa)?.map((tag, idx) => (
-                          <span
-                            key={idx}
-                            className="text-[10px] px-2 py-0.5 rounded bg-[#181206] text-[#b4a899] border border-[#4d3a20]/50"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Chevron indicator */}
+                  <div className="flex items-center gap-2 shrink-0 self-start sm:self-center pt-1 sm:pt-0">
                     <div className="p-1 rounded text-[#b4a899] hover:text-[#e6ded0]">
                       {isExpanded ? (
                         <ChevronUp className="w-5 h-5 text-[#eb644c]" />
@@ -118,33 +118,9 @@ export const ArtistsSection: React.FC<ArtistsSectionProps> = ({ currentLang }) =
                 {isExpanded && (
                   <div
                     id={`artist-bio-${artist.id}`}
-                    className="px-4 pb-5 sm:px-6 sm:pb-6 pt-3 border-t border-[#4d3a20]/60 space-y-3.5 text-xs sm:text-sm text-[#e6ded0] leading-relaxed text-justify"
+                    className="px-4 pb-5 sm:px-6 sm:pb-6 pt-4 border-t border-[#4d3a20]/60 space-y-3.5 text-xs sm:text-sm text-[#e6ded0] leading-relaxed text-justify"
                   >
-                    {/* Tags for mobile view */}
-                    {artist.tagsFa && (
-                      <div className="flex sm:hidden flex-wrap gap-1.5 mb-2">
-                        {(isEn ? artist.tagsEn : artist.tagsFa)?.map((tag, idx) => (
-                          <span
-                            key={idx}
-                            className="text-[10px] px-2 py-0.5 rounded bg-[#181206] text-[#b4a899] border border-[#4d3a20]/50"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
 
-                    {/* Editorial Note (e.g. for Setareh Beheshti) */}
-                    {artist.editorialNoteFa && (
-                      <div className="p-3 rounded-lg bg-[#eb644c]/10 border border-[#eb644c]/30 text-xs text-[#eb644c] flex items-start gap-2">
-                        <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                        <p>
-                          {isEn
-                            ? artist.editorialNoteEn
-                            : artist.editorialNoteFa}
-                        </p>
-                      </div>
-                    )}
 
                     {/* Paragraphs */}
                     {paragraphs.map((p, idx) => (

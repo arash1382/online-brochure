@@ -7,6 +7,9 @@ import {
   HeartHandshake,
   Check,
   Share2,
+  ChevronDown,
+  ChevronUp,
+  Sparkles,
 } from 'lucide-react';
 
 interface CreditsSectionProps {
@@ -17,6 +20,7 @@ export const CreditsSection: React.FC<CreditsSectionProps> = ({ currentLang }) =
   const isEn = currentLang === 'en';
   const { credits, acknowledgements, links } = brochureData;
   const [copiedLink, setCopiedLink] = useState(false);
+  const [isEmaratExpanded, setIsEmaratExpanded] = useState(false);
 
   const handleShareBrochure = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -97,6 +101,64 @@ export const CreditsSection: React.FC<CreditsSectionProps> = ({ currentLang }) =
                 )
               )}
             </div>
+
+            {/* Emarat Ayandeh Special Acknowledgement Card */}
+            {acknowledgements.emaratAyandeh && (
+              <div className="mt-3.5 rounded-xl border border-[#4d3a20] bg-[#2d2212] overflow-hidden transition-all duration-200">
+                <button
+                  type="button"
+                  onClick={() => setIsEmaratExpanded(!isEmaratExpanded)}
+                  aria-expanded={isEmaratExpanded}
+                  aria-controls="emarat-ayandeh-members"
+                  className="w-full p-3 sm:p-3.5 flex items-center justify-between text-start cursor-pointer hover:bg-[#392b17]/60 transition-colors select-none"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-[#eb644c]/15 text-[#eb644c] flex items-center justify-center shrink-0">
+                      <Sparkles className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-bold text-[#e6ded0]">
+                        {isEn
+                          ? acknowledgements.emaratAyandeh.titleEn
+                          : acknowledgements.emaratAyandeh.titleFa}
+                      </h4>
+                      <div className="text-[11px] text-[#eb644c] font-medium">
+                        {isEn
+                          ? acknowledgements.emaratAyandeh.subtitleEn
+                          : acknowledgements.emaratAyandeh.subtitleFa}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-1 rounded text-[#b4a899]">
+                    {isEmaratExpanded ? (
+                      <ChevronUp className="w-4 h-4 text-[#eb644c]" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )}
+                  </div>
+                </button>
+
+                {isEmaratExpanded && (
+                  <div
+                    id="emarat-ayandeh-members"
+                    className="px-3.5 pb-3.5 pt-2 border-t border-[#4d3a20]/60 space-y-2"
+                  >
+                    {(isEn
+                      ? acknowledgements.emaratAyandeh.membersEn
+                      : acknowledgements.emaratAyandeh.membersFa
+                    ).map((name, idx) => (
+                      <div
+                        key={idx}
+                        className="p-2 rounded-lg bg-[#181206]/70 border border-[#4d3a20]/40 flex items-center justify-between text-xs text-[#e6ded0]"
+                      >
+                        <span className="font-semibold">{name}</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#eb644c]/70" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
