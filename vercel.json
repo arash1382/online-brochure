@@ -4,9 +4,28 @@
   "installCommand": "npm install",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "headers": [
+    {
+      "source": "/digital-guide-offline.html",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"digital-guide-offline.html\""
+        },
+        {
+          "key": "Content-Type",
+          "value": "text/html; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!digital-guide-offline\\.html$).*)",
       "destination": "/index.html"
     }
   ]

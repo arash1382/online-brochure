@@ -8,6 +8,7 @@ import { EnsemblesSection } from './components/EnsemblesSection';
 import { CreditsSection } from './components/CreditsSection';
 import { AcknowledgementsSection } from './components/AcknowledgementsSection';
 import { BackToTop } from './components/BackToTop';
+import { FirstVisitDownloadModal } from './components/FirstVisitDownloadModal';
 
 export default function App() {
   // Ensure document language and RTL direction are set permanently
@@ -18,6 +19,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#261c0b] text-[#e6ded0] flex flex-col font-normal selection:bg-[#eb644c] selection:text-[#261c0b]">
+      {/* First-visit offline brochure download modal */}
+      <FirstVisitDownloadModal />
+
       {/* Top Header & Navigation */}
       <HeaderNav />
 

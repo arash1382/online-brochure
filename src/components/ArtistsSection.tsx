@@ -81,7 +81,7 @@ export const ArtistsSection: React.FC = () => {
                         <img
                           src={artist.image}
                           alt={artist.alt || artist.name}
-                          loading="lazy"
+                          loading="eager"
                           decoding="async"
                           className="w-full h-full object-cover object-top"
                         />

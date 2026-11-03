@@ -1,4 +1,5 @@
 import express from 'express';
+import fs from 'fs';
 import http from 'http';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -14,6 +15,28 @@ const httpServer = http.createServer(app);
 const port = parseInt(process.env.PORT || '3000', 10);
 
 app.use(express.json({ limit: '10mb' }));
+
+function resolveOfflineHtmlPath(): string | null {
+  const distPath = path.resolve(__dirname, 'dist', 'digital-guide-offline.html');
+  if (fs.existsSync(distPath)) return distPath;
+  const publicPath = path.resolve(__dirname, 'public', 'digital-guide-offline.html');
+  if (fs.existsSync(publicPath)) return publicPath;
+  return null;
+}
+
+app.get(['/api/offline-brochure', '/digital-guide-offline.html'], (_req, res) => {
+  const filePath = resolveOfflineHtmlPath();
+  if (!filePath) {
+    res.status(404).send('Offline guide not found');
+    return;
+  }
+  res.setHeader('Content-Disposition', 'attachment; filename="digital-guide-offline.html"');
+  // Use application/octet-stream so reverse proxies with sub_filter_types text/html
+  // never inject iframe/auth scripts into the downloaded standalone HTML file.
+  res.setHeader('Content-Type', 'application/octet-stream');
+  res.setHeader('Cache-Control', 'no-store');
+  res.sendFile(filePath);
+});
 
 if (process.env.NODE_ENV !== 'production') {
   const { createServer } = await import('vite');

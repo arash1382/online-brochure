@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { brochureData } from '../data/brochureData';
-import { ExternalLink, Instagram, Globe, Check, Share2, HeartHandshake } from 'lucide-react';
+import { ExternalLink, Instagram, Globe, Download, HeartHandshake } from 'lucide-react';
+import {
+  downloadStandaloneBrochure,
+  preloadStandaloneBrochureHtml,
+} from '../utils/offlineBrochureDownload';
 
 export const AcknowledgementsSection: React.FC = () => {
   const { acknowledgements, specialThanks, links } = brochureData;
-  const [copiedLink, setCopiedLink] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
-  const handleShareBrochure = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2000);
+  useEffect(() => {
+    void preloadStandaloneBrochureHtml();
+  }, []);
+
+  const handleOfflineDownload = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (isDownloading) return;
+    setIsDownloading(true);
+    try {
+      await downloadStandaloneBrochure();
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
@@ -114,20 +127,13 @@ export const AcknowledgementsSection: React.FC = () => {
           </div>
 
           <button
-            onClick={handleShareBrochure}
-            className="flex items-center gap-1.5 text-[#b4a899] hover:text-[#eb644c] transition-colors cursor-pointer"
+            type="button"
+            onClick={handleOfflineDownload}
+            disabled={isDownloading}
+            className="flex items-center gap-1.5 text-[#b4a899] hover:text-[#eb644c] transition-colors cursor-pointer disabled:opacity-60"
           >
-            {copiedLink ? (
-              <>
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-emerald-400">پیوند بروشور کپی شد!</span>
-              </>
-            ) : (
-              <>
-                <Share2 className="w-3.5 h-3.5" />
-                <span>اشتراک‌گذاری نشانی بروشور</span>
-              </>
-            )}
+            <Download className="w-3.5 h-3.5" />
+            <span>دانلود راهنمای دیجیتال</span>
           </button>
         </div>
       </div>
