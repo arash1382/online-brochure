@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 export const CreditsSection: React.FC = () => {
-  const { credits, acknowledgements, links } = brochureData;
+  const { credits, emaratCredits, acknowledgements, links, specialThanks } = brochureData;
   const [copiedLink, setCopiedLink] = useState(false);
   const [isEmaratExpanded, setIsEmaratExpanded] = useState(false);
   const [isThanksExpanded, setIsThanksExpanded] = useState(false);
@@ -59,7 +59,7 @@ export const CreditsSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Two Accordion Cards: «عمارت آینده» and «با تشکر از» (Empty & Collapsed by default) */}
+            {/* Two Accordion Cards: «عمارت آینده» and «با تشکر از» (Collapsed by default) */}
             <div className="mt-5 space-y-2.5">
               {/* 1. عمارت آینده */}
               <div className="rounded-xl border border-[#4d3a20] bg-[#2d2212] overflow-hidden transition-all duration-200">
@@ -70,9 +70,14 @@ export const CreditsSection: React.FC = () => {
                   aria-controls="emarat-ayandeh-content"
                   className="w-full p-3 sm:p-3.5 flex items-center justify-between text-start cursor-pointer hover:bg-[#392b17]/60 transition-colors select-none"
                 >
-                  <span className="text-xs sm:text-sm font-bold text-[#e6ded0]">
-                    عمارت آینده
-                  </span>
+                  <div className="flex flex-col text-start">
+                    <span className="text-xs sm:text-sm font-bold text-[#e6ded0]">
+                      عمارت آینده
+                    </span>
+                    <span className="text-[11px] sm:text-xs text-[#b4a899]/80 font-normal mt-0.5 leading-normal">
+                      اکوسیستم کاربردی هوش مصنوعی
+                    </span>
+                  </div>
                   <div className="p-1 rounded text-[#b4a899]">
                     {isEmaratExpanded ? (
                       <ChevronUp className="w-4 h-4 text-[#eb644c]" />
@@ -85,9 +90,54 @@ export const CreditsSection: React.FC = () => {
                 {isEmaratExpanded && (
                   <div
                     id="emarat-ayandeh-content"
-                    className="px-4 py-3 border-t border-[#4d3a20]/60 text-xs text-[#b4a899]"
+                    className="p-3.5 sm:p-4 border-t border-[#4d3a20]/60 space-y-2.5 sm:space-y-3"
                   >
-                    {/* Empty content as requested */}
+                    {emaratCredits.map((item, idx) => {
+                      const isDocFilm = item.role === 'فیلم اجرا و مستندنگاری';
+                      const personList =
+                        item.names && item.names.length > 0
+                          ? item.names
+                          : item.name
+                          ? item.name.split('،').map((s) => s.trim())
+                          : [];
+
+                      if (isDocFilm) {
+                        return (
+                          <div
+                            key={idx}
+                            className="p-3.5 sm:p-4 rounded-xl bg-[#261c0b] border border-[#4d3a20]/60 flex flex-col items-start gap-1 text-right w-full justify-center"
+                          >
+                            <span className="text-[#b4a899] text-[13px] sm:text-sm font-medium leading-[1.7] block text-right">
+                              {item.role}:
+                            </span>
+                            <span className="text-[#e6ded0] text-[13.5px] sm:text-sm font-semibold whitespace-nowrap break-keep text-right leading-[1.7]">
+                              {item.name}
+                            </span>
+                          </div>
+                        );
+                      }
+
+                      return (
+                        <div
+                          key={idx}
+                          className="p-3.5 sm:p-4 rounded-xl bg-[#261c0b] border border-[#4d3a20]/60 flex items-start justify-between gap-3 sm:gap-4"
+                        >
+                          <span className="text-[#b4a899] text-[13px] sm:text-sm font-medium shrink-0 leading-[1.7]">
+                            {item.role}:
+                          </span>
+                          <div className="flex flex-col items-end gap-1 text-end leading-[1.7] min-w-0">
+                            {personList.map((person, pIdx) => (
+                              <span
+                                key={pIdx}
+                                className="text-[#e6ded0] text-[13.5px] sm:text-sm font-semibold whitespace-nowrap break-keep"
+                              >
+                                {person}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -116,9 +166,21 @@ export const CreditsSection: React.FC = () => {
                 {isThanksExpanded && (
                   <div
                     id="thanks-content"
-                    className="px-4 py-3 border-t border-[#4d3a20]/60 text-xs text-[#b4a899]"
+                    className="px-4 py-3 border-t border-[#4d3a20]/60 text-xs text-[#b4a899] space-y-2.5"
                   >
-                    {/* Empty content as requested */}
+                    <p className="text-[#b4a899] leading-relaxed mb-2">
+                      {acknowledgements.intro}
+                    </p>
+                    <div className="space-y-2">
+                      {specialThanks.map((name, idx) => (
+                        <div
+                          key={idx}
+                          className="p-2.5 rounded-lg bg-[#261c0b] border border-[#4d3a20]/60 flex flex-col gap-0.5"
+                        >
+                          <span className="font-bold text-[#e6ded0]">{name}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>

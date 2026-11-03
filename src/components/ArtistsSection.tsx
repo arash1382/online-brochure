@@ -117,9 +117,29 @@ export const ArtistsSection: React.FC = () => {
                     id={`artist-bio-${artist.id}`}
                     className="px-4 pb-5 sm:px-6 sm:pb-6 pt-4 border-t border-[#4d3a20]/60 space-y-3 text-xs sm:text-sm text-[#e6ded0] leading-relaxed text-justify"
                   >
-                    {artist.paragraphs?.map((p, idx) => (
-                      <p key={idx}>{p}</p>
-                    ))}
+                    {artist.paragraphs?.map((p, idx) => {
+                      const targetTitle = 'Electronic Panorama: Prospective 21e Siecle';
+                      if (p.includes(targetTitle)) {
+                        const parts = p.split(targetTitle);
+                        return (
+                          <p key={idx}>
+                            {parts[0]}
+                            <span
+                              dir="ltr"
+                              style={{
+                                fontFamily:
+                                  'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                              }}
+                              className="italic inline-block font-normal"
+                            >
+                              {targetTitle}
+                            </span>
+                            {parts[1]}
+                          </p>
+                        );
+                      }
+                      return <p key={idx}>{p}</p>;
+                    })}
                   </div>
                 )}
               </div>
