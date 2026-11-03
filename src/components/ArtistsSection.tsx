@@ -126,9 +126,14 @@ export const ArtistsSection: React.FC = () => {
                             {parts[0]}
                             <span
                               dir="ltr"
-                              className="italic inline-block text-inherit font-['Abar']"
+                              style={{
+                                direction: 'ltr',
+                                unicodeBidi: 'isolate',
+                                fontSize: '1.1em',
+                              }}
+                              className="italic font-['Abar'] inline"
                             >
-                              Electronic Panorama: Prospective <span className="font-sans not-italic" style={{ fontSize: '1em' }} dir="ltr">21</span>e Siecle
+                              Electronic Panorama: Prospective <span className="font-sans not-italic" dir="ltr" style={{ fontSize: '1em' }}>21</span>e Siecle
                             </span>
                             {parts[1]}
                           </p>
