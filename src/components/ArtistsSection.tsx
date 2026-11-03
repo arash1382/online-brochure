@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { brochureData } from '../data/brochureData';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-interface ArtistsSectionProps {
-  currentLang: 'fa' | 'en';
-}
-
-export const ArtistsSection: React.FC<ArtistsSectionProps> = ({ currentLang }) => {
-  const isEn = currentLang === 'en';
+export const ArtistsSection: React.FC = () => {
   const { artists } = brochureData;
 
   // All artist biographies collapsed by default on initial page load
@@ -24,31 +19,43 @@ export const ArtistsSection: React.FC<ArtistsSectionProps> = ({ currentLang }) =
     <section
       id="artists"
       className="py-12 sm:py-16 px-4 border-b border-[#4d3a20]/40 bg-[#261c0b]/80"
-      aria-label={isEn ? 'Artist Biographies' : 'زندگی‌نامه هنرمندان'}
+      aria-label="هنرمندان"
     >
       <div className="max-w-4xl mx-auto">
-        {/* Section Header */}
+        {/* Section Header: Title «هنرمندان» only */}
         <div className="text-center mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#eb644c] mb-2">
-            <span className="w-4 h-[1px] bg-[#eb644c]" />
-            <span>{isEn ? 'Soloists & Leadership' : 'آفرینندگان و سولیست‌ها'}</span>
-            <span className="w-4 h-[1px] bg-[#eb644c]" />
-          </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#e6ded0]">
-            {isEn ? 'Artist Biographies' : 'زندگی‌نامه هنرمندان'}
+            هنرمندان
           </h2>
-          <p className="text-xs sm:text-sm text-[#b4a899] mt-1.5 max-w-lg mx-auto">
-            {isEn
-              ? 'Complete biographies and profiles transcribed from the official brochure.'
-              : 'متن کامل شرح‌حال و سوابق هنری مندرج در نسخه بروشور بدون تلخیص.'}
-          </p>
         </div>
 
-        {/* Expandable Artists Accordion (All collapsed by default across all viewports) */}
+        {/* Expandable Artists Accordion (All collapsed by default) */}
         <div className="space-y-3">
           {artists.map((artist) => {
             const isExpanded = !!expandedBioIds[artist.id];
-            const paragraphs = isEn ? artist.paragraphsEn : artist.paragraphsFa;
+            const hasBioParagraphs = artist.paragraphs && artist.paragraphs.length > 0;
+
+            // Special card for ستاره بهشتی (NO photo, 3 lines, no accordion bio)
+            if (artist.hasNoPhoto) {
+              return (
+                <div
+                  key={artist.id}
+                  className="rounded-xl border border-[#4d3a20] bg-[#261c0b] p-4 sm:p-5"
+                >
+                  <h3 className="text-base sm:text-lg font-bold text-[#e6ded0]">
+                    {artist.name}
+                  </h3>
+                  <div className="mt-2.5 space-y-1 text-xs sm:text-sm text-[#b4a899]">
+                    {artist.bulletLines?.map((line, idx) => (
+                      <div key={idx} className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#eb644c]/70 shrink-0" />
+                        <span>{line}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
 
             return (
               <div
@@ -62,68 +69,55 @@ export const ArtistsSection: React.FC<ArtistsSectionProps> = ({ currentLang }) =
                 {/* Header / Compact Preview */}
                 <button
                   type="button"
-                  onClick={() => toggleBio(artist.id)}
-                  className="w-full p-3 sm:p-5 flex items-stretch sm:items-center justify-between text-start cursor-pointer hover:bg-[#392b17]/50 select-none transition-colors gap-3 sm:gap-4"
+                  onClick={() => hasBioParagraphs && toggleBio(artist.id)}
+                  className="w-full p-3 sm:p-4 flex items-stretch sm:items-center justify-between text-start cursor-pointer hover:bg-[#392b17]/50 select-none transition-colors gap-3 sm:gap-4"
                   aria-expanded={isExpanded}
                   aria-controls={`artist-bio-${artist.id}`}
                 >
-                  <div className="flex items-start sm:items-center gap-3 sm:gap-4 flex-1 min-w-0">
-                    {/* Portrait Image (104px-124px width, 3:4 aspect ratio, local asset) */}
-                    <div className="w-[104px] sm:w-[116px] md:w-[124px] aspect-[3/4] rounded-lg sm:rounded-xl overflow-hidden border border-[#4d3a20] shadow-md shrink-0 bg-[#181206]">
-                      <img
-                        src={artist.image}
-                        alt={isEn ? artist.altEn : artist.altFa}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover object-top"
-                      />
-                    </div>
+                  <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                    {/* Portrait Image (aspect ratio 3:4, local asset) */}
+                    {artist.image && (
+                      <div className="w-[88px] sm:w-[104px] aspect-[3/4] rounded-lg overflow-hidden border border-[#4d3a20] shadow-md shrink-0 bg-[#181206]">
+                        <img
+                          src={artist.image}
+                          alt={artist.alt || artist.name}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover object-top"
+                        />
+                      </div>
+                    )}
 
                     <div className="flex-1 min-w-0 py-0.5 sm:py-0">
-                      <h3 className="text-sm sm:text-base md:text-lg font-bold text-[#e6ded0]">
-                        {isEn ? artist.nameEn : artist.nameFa}
+                      <h3 className="text-base sm:text-lg font-bold text-[#e6ded0]">
+                        {artist.name}
                       </h3>
-                      <div className="text-[11px] sm:text-xs text-[#eb644c] font-medium mt-1 leading-snug">
-                        {isEn ? artist.roleEn : artist.roleFa}
+                      <div className="text-xs sm:text-sm text-[#eb644c] font-medium mt-1 leading-snug">
+                        {artist.role}
                       </div>
-
-                      {/* Tags preview */}
-                      {(isEn ? artist.tagsEn : artist.tagsFa) && (
-                        <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-2.5">
-                          {(isEn ? artist.tagsEn : artist.tagsFa)?.map((tag, idx) => (
-                            <span
-                              key={idx}
-                              className="text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded bg-[#181206] text-[#b4a899] border border-[#4d3a20]/50"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0 self-start sm:self-center pt-1 sm:pt-0">
-                    <div className="p-1 rounded text-[#b4a899] hover:text-[#e6ded0]">
-                      {isExpanded ? (
-                        <ChevronUp className="w-5 h-5 text-[#eb644c]" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5" />
-                      )}
+                  {hasBioParagraphs && (
+                    <div className="flex items-center gap-2 shrink-0 self-center">
+                      <div className="p-1 rounded text-[#b4a899] hover:text-[#e6ded0]">
+                        {isExpanded ? (
+                          <ChevronUp className="w-5 h-5 text-[#eb644c]" />
+                        ) : (
+                          <ChevronDown className="w-5 h-5" />
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </button>
 
                 {/* Expanded Biography Content */}
-                {isExpanded && (
+                {isExpanded && hasBioParagraphs && (
                   <div
                     id={`artist-bio-${artist.id}`}
-                    className="px-4 pb-5 sm:px-6 sm:pb-6 pt-4 border-t border-[#4d3a20]/60 space-y-3.5 text-xs sm:text-sm text-[#e6ded0] leading-relaxed text-justify"
+                    className="px-4 pb-5 sm:px-6 sm:pb-6 pt-4 border-t border-[#4d3a20]/60 space-y-3 text-xs sm:text-sm text-[#e6ded0] leading-relaxed text-justify"
                   >
-
-
-                    {/* Paragraphs */}
-                    {paragraphs.map((p, idx) => (
+                    {artist.paragraphs?.map((p, idx) => (
                       <p key={idx}>{p}</p>
                     ))}
                   </div>
