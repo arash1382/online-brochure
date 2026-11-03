@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, BookOpen, Music, Users, Info } from 'lucide-react';
+import { Menu, X, BookOpen, Music, Users, Info, HeartHandshake } from 'lucide-react';
 
 export const HeaderNav: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -16,7 +16,15 @@ export const HeaderNav: React.FC = () => {
       }
 
       // Check active section
-      const sections = ['hero', 'essay', 'program', 'artists', 'ensembles', 'credits'];
+      const sections = [
+        'hero',
+        'essay',
+        'program',
+        'artists',
+        'ensembles',
+        'credits',
+        'acknowledgements',
+      ];
       const scrollPosition = window.scrollY + 140;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -37,8 +45,9 @@ export const HeaderNav: React.FC = () => {
     { id: 'essay', label: 'مواجهه با موسیقی نو', icon: BookOpen },
     { id: 'program', label: 'برنامه کنسرت', icon: Music },
     { id: 'artists', label: 'هنرمندان', icon: Users },
-    { id: 'ensembles', label: 'ارکسترها و آنسامبل‌ها', icon: Users },
-    { id: 'credits', label: 'عوامل اجرایی و قدردانی', icon: Info },
+    { id: 'ensembles', label: 'ارکستر و آنسامبل‌ها', icon: Users },
+    { id: 'credits', label: 'مدیریت و عوامل اجرایی', icon: Info },
+    { id: 'acknowledgements', label: 'سپاس و قدردانی', icon: HeartHandshake },
   ];
 
   const handleNavClick = (id: string) => {
@@ -65,25 +74,23 @@ export const HeaderNav: React.FC = () => {
       />
 
       <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-        {/* Left / Start: Title / Brand Logo */}
+        {/* Left / Start: Title / Horizontal Brand Logo */}
         <div className="flex items-center gap-3">
           <button
             onClick={() => handleNavClick('hero')}
-            className="flex items-center gap-2.5 text-start group cursor-pointer focus:outline-none"
+            className="flex items-center gap-3 text-start group cursor-pointer focus:outline-none"
             title="بازگشت به ابتدای بروشور"
           >
-            <div className="w-8 h-8 rounded bg-[#eb644c]/10 border border-[#eb644c]/30 flex items-center justify-center transition-colors group-hover:bg-[#eb644c]/20 overflow-hidden p-0.5">
-              <img
-                src="/assets/logo.png"
-                alt="لوگوی رویداد"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold text-[#e6ded0] tracking-wide leading-none group-hover:text-[#eb644c] transition-colors">
+            <img
+              src="/assets/logo-horizontal.svg"
+              alt="گروه موسیقی تهران"
+              className="h-7 sm:h-8 w-auto max-w-[130px] sm:max-w-[150px] object-contain transition-transform group-hover:scale-105"
+            />
+            <div className="hidden sm:flex flex-col border-s border-[#4d3a20]/60 ps-3">
+              <span className="text-xs sm:text-sm font-semibold text-[#e6ded0] tracking-wide leading-none group-hover:text-[#eb644c] transition-colors">
                 موسیقی نو در ایران
               </span>
-              <span className="text-[11px] text-[#b4a899] leading-tight mt-0.5">
+              <span className="text-[10px] sm:text-[11px] text-[#b4a899] leading-tight mt-0.5">
                 علیرضا مشایخی
               </span>
             </div>

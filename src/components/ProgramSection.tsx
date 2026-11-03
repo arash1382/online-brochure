@@ -2,6 +2,66 @@ import React, { useState } from 'react';
 import { brochureData, Work } from '../data/brochureData';
 import { ChevronDown, ChevronUp, User, Users, Award } from 'lucide-react';
 
+interface WorkDetailItem {
+  id: string;
+  type: 'performer' | 'conductor' | 'ensemble';
+  label?: string;
+  name: string;
+}
+
+const getWorkDetailItems = (work: Work): WorkDetailItem[] => {
+  const items: WorkDetailItem[] = [];
+
+  if (work.id === 'work-1') {
+    // 1. ویولن: امین غفاری, 2. رهبر: آرش امینی, 3. آنسامبل کوبه‌ای کاروان
+    if (work.performers) {
+      work.performers.forEach((p, idx) =>
+        items.push({ id: `p-${idx}`, type: 'performer', label: p.role, name: p.name })
+      );
+    }
+    if (work.conductor) items.push({ id: 'c', type: 'conductor', label: 'رهبر', name: work.conductor });
+    work.ensembles.forEach((e, idx) => items.push({ id: `e-${idx}`, type: 'ensemble', name: e }));
+  } else if (work.id === 'work-2') {
+    // 1. ریکوردر, 2. ویولنسل, 3. آنسامبل کوبه‌ای کاروان
+    if (work.performers) {
+      work.performers.forEach((p, idx) =>
+        items.push({ id: `p-${idx}`, type: 'performer', label: p.role, name: p.name })
+      );
+    }
+    work.ensembles.forEach((e, idx) => items.push({ id: `e-${idx}`, type: 'ensemble', name: e }));
+  } else if (work.id === 'work-3') {
+    // 1. کوارتت زهی نماد
+    work.ensembles.forEach((e, idx) => items.push({ id: `e-${idx}`, type: 'ensemble', name: e }));
+  } else if (work.id === 'work-4') {
+    // 1. رهبر: آرش امینی, 2. کوارتت زهی نماد, 3. آنسامبل کوبه‌ای کاروان
+    if (work.conductor) items.push({ id: 'c', type: 'conductor', label: 'رهبر', name: work.conductor });
+    work.ensembles.forEach((e, idx) => items.push({ id: `e-${idx}`, type: 'ensemble', name: e }));
+  } else if (work.id === 'work-5') {
+    // 1. رهبر: آرش امینی, 2. ارکستر زهی خلیج‌فارس
+    if (work.conductor) items.push({ id: 'c', type: 'conductor', label: 'رهبر', name: work.conductor });
+    work.ensembles.forEach((e, idx) => items.push({ id: `e-${idx}`, type: 'ensemble', name: e }));
+  } else if (work.id === 'work-6') {
+    // 1. ویولا: امین غفاری, 2. رهبر: آرش امینی, 3. ارکستر زهی خلیج‌فارس, 4. آنسامبل کوبه‌ای کاروان
+    if (work.performers) {
+      work.performers.forEach((p, idx) =>
+        items.push({ id: `p-${idx}`, type: 'performer', label: p.role, name: p.name })
+      );
+    }
+    if (work.conductor) items.push({ id: 'c', type: 'conductor', label: 'رهبر', name: work.conductor });
+    work.ensembles.forEach((e, idx) => items.push({ id: `e-${idx}`, type: 'ensemble', name: e }));
+  } else {
+    if (work.performers) {
+      work.performers.forEach((p, idx) =>
+        items.push({ id: `p-${idx}`, type: 'performer', label: p.role, name: p.name })
+      );
+    }
+    if (work.conductor) items.push({ id: 'c', type: 'conductor', label: 'رهبر', name: work.conductor });
+    work.ensembles.forEach((e, idx) => items.push({ id: `e-${idx}`, type: 'ensemble', name: e }));
+  }
+
+  return items;
+};
+
 export const ProgramSection: React.FC = () => {
   const { works, intermission } = brochureData;
 
@@ -87,47 +147,26 @@ export const ProgramSection: React.FC = () => {
         {isExpanded && (
           <div
             id={`work-details-${work.id}`}
-            className="px-4 pb-5 sm:px-5 sm:pb-6 pt-2 border-t border-[#4d3a20]/50 space-y-2.5"
+            className="px-4 pb-5 sm:px-5 sm:pb-6 pt-2 border-t border-[#4d3a20]/50 space-y-2"
           >
-            {/* Performers */}
-            {work.performers && work.performers.length > 0 && (
-              <div className="space-y-1.5">
-                {work.performers.map((p, idx) => (
-                  <div
-                    key={idx}
-                    className="p-2.5 rounded bg-[#181206]/80 border border-[#4d3a20]/60 flex items-center gap-2 text-xs"
-                  >
-                    <User className="w-3.5 h-3.5 text-[#b4a899] shrink-0" />
-                    <div>
-                      <span className="text-[#b4a899] font-medium">{p.role}: </span>
-                      <span className="text-[#e6ded0] font-bold">{p.name}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Ensembles */}
-            {work.ensembles && work.ensembles.length > 0 && (
-              <div className="p-2.5 rounded bg-[#181206]/80 border border-[#4d3a20]/60 flex items-center gap-2 text-xs">
-                <Users className="w-3.5 h-3.5 text-[#b4a899] shrink-0" />
+            {getWorkDetailItems(work).map((item) => (
+              <div
+                key={item.id}
+                className="p-2.5 rounded bg-[#181206]/80 border border-[#4d3a20]/60 flex items-center gap-2 text-xs"
+              >
+                {item.type === 'ensemble' ? (
+                  <Users className="w-3.5 h-3.5 text-[#b4a899] shrink-0" />
+                ) : (
+                  <User className="w-3.5 h-3.5 text-[#b4a899] shrink-0" />
+                )}
                 <div>
-                  <span className="text-[#b4a899] font-medium">اجرا: </span>
-                  <span className="text-[#e6ded0] font-bold">{work.ensembles.join(' | ')}</span>
+                  {item.label ? (
+                    <span className="text-[#b4a899] font-medium">{item.label}: </span>
+                  ) : null}
+                  <span className="text-[#e6ded0] font-bold">{item.name}</span>
                 </div>
               </div>
-            )}
-
-            {/* Conductor (Standard styling without special orange highlighting) */}
-            {work.conductor && (
-              <div className="p-2.5 rounded bg-[#181206]/80 border border-[#4d3a20]/60 flex items-center gap-2 text-xs">
-                <User className="w-3.5 h-3.5 text-[#b4a899] shrink-0" />
-                <div>
-                  <span className="text-[#b4a899] font-medium">رهبر: </span>
-                  <span className="text-[#e6ded0] font-bold">{work.conductor}</span>
-                </div>
-              </div>
-            )}
+            ))}
           </div>
         )}
       </article>
@@ -161,14 +200,11 @@ export const ProgramSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Intermission Marker: Title «تنفس» and Subtitle «پایان بخش نخست کنسرت» */}
+        {/* Intermission Marker: Title «تنفس» only */}
         <div className="my-8 py-5 px-5 rounded-2xl bg-gradient-to-r from-[#181206] via-[#2f2211] to-[#181206] border border-[#eb644c]/40 text-center shadow-lg relative overflow-hidden">
           <h3 className="text-xl sm:text-2xl font-black text-[#e6ded0] tracking-wide">
             «{intermission.title}»
           </h3>
-          <p className="text-xs sm:text-sm text-[#b4a899] mt-1">
-            {intermission.subtitle}
-          </p>
         </div>
 
         {/* Part Two: Works 5 and 6 */}

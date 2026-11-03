@@ -126,13 +126,9 @@ export const ArtistsSection: React.FC = () => {
                             {parts[0]}
                             <span
                               dir="ltr"
-                              style={{
-                                fontFamily:
-                                  'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-                              }}
-                              className="italic inline-block font-normal"
+                              className="italic inline-block text-inherit font-['Abar']"
                             >
-                              {targetTitle}
+                              Electronic Panorama: Prospective <span className="font-sans not-italic" style={{ fontSize: '1em' }} dir="ltr">21</span>e Siecle
                             </span>
                             {parts[1]}
                           </p>

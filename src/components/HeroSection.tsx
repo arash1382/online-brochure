@@ -79,19 +79,19 @@ export const HeroSection: React.FC = () => {
         {/* Action Buttons */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <button
-            onClick={() => scrollToSection('program')}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#eb644c] text-[#261c0b] text-xs sm:text-sm font-bold shadow-lg shadow-[#eb644c]/20 hover:bg-[#f17b66] cursor-pointer transition-all active:scale-95"
-          >
-            <Music className="w-4 h-4" />
-            <span>مشاهده رپرتوار اجرا</span>
-          </button>
-
-          <button
             onClick={() => scrollToSection('essay')}
             className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2d2212] border border-[#4d3a20] text-[#e6ded0] text-xs sm:text-sm font-semibold hover:bg-[#392b17] hover:border-[#eb644c]/50 cursor-pointer transition-all active:scale-95"
           >
             <BookOpen className="w-4 h-4 text-[#eb644c]" />
             <span>مواجهه با موسیقی نو</span>
+          </button>
+
+          <button
+            onClick={() => scrollToSection('program')}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#eb644c] text-[#261c0b] text-xs sm:text-sm font-bold shadow-lg shadow-[#eb644c]/20 hover:bg-[#f17b66] cursor-pointer transition-all active:scale-95"
+          >
+            <Music className="w-4 h-4" />
+            <span>مشاهده برنامه</span>
           </button>
         </div>
 

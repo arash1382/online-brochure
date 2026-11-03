@@ -8,13 +8,13 @@ export const EnsemblesSection: React.FC = () => {
     <section
       id="ensembles"
       className="py-12 sm:py-16 px-4 border-b border-[#4d3a20]/40 bg-[#261c0b]"
-      aria-label="ارکسترها و آنسامبل‌ها"
+      aria-label="ارکستر و آنسامبل‌ها"
     >
       <div className="max-w-4xl mx-auto">
-        {/* Section Header: Title «ارکسترها و آنسامبل‌ها» only */}
+        {/* Section Header: Title «ارکستر و آنسامبل‌ها» only */}
         <div className="text-center mb-8 sm:mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#e6ded0]">
-            ارکسترها و آنسامبل‌ها
+            ارکستر و آنسامبل‌ها
           </h2>
         </div>
 

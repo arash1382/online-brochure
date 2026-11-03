@@ -6,6 +6,7 @@ import { ProgramSection } from './components/ProgramSection';
 import { ArtistsSection } from './components/ArtistsSection';
 import { EnsemblesSection } from './components/EnsemblesSection';
 import { CreditsSection } from './components/CreditsSection';
+import { AcknowledgementsSection } from './components/AcknowledgementsSection';
 import { BackToTop } from './components/BackToTop';
 
 export default function App() {
@@ -34,11 +35,14 @@ export default function App() {
         {/* 4. Artists and Biographies */}
         <ArtistsSection />
 
-        {/* 5. Ensembles & Orchestras */}
+        {/* 5. Orchestras and Ensembles */}
         <EnsemblesSection />
 
-        {/* 6. Production Credits, Acknowledgements & Colophon */}
+        {/* 6. Management & Production Credits */}
         <CreditsSection />
+
+        {/* 7. Acknowledgements */}
+        <AcknowledgementsSection />
       </main>
 
       {/* Floating Back to Top Button */}

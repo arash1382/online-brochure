@@ -31,12 +31,7 @@ export const EssaySection: React.FC = () => {
         </div>
 
         {/* Reader Controls: Font size adjusters */}
-        <div className="flex items-center justify-between mb-4 pb-2 border-b border-[#4d3a20]/40 text-xs text-[#b4a899]">
-          <span className="flex items-center gap-1.5 font-medium">
-            <BookOpen className="w-3.5 h-3.5 text-[#eb644c]" />
-            <span>متن یادداشت</span>
-          </span>
-
+        <div className="flex items-center justify-end mb-4 pb-2 border-b border-[#4d3a20]/40 text-xs text-[#b4a899]">
           <div className="flex items-center gap-1 bg-[#2d2212] p-1 rounded border border-[#4d3a20]">
             <span className="px-1 text-[11px] text-[#7a6e60]">اندازه متن:</span>
             <button
@@ -91,28 +86,14 @@ export const EssaySection: React.FC = () => {
               isExpanded ? 'block' : 'hidden'
             }`}
           >
-            {essay.paragraphs.slice(2).map((para, index) => {
-              const isLast = index === essay.paragraphs.slice(2).length - 1;
-              return (
-                <p
-                  key={index}
-                  className={`${fontClasses[fontSizeLevel]} text-[#e6ded0] text-justify ${
-                    isLast
-                      ? 'p-3.5 rounded-lg bg-[#2d2212]/90 border border-[#eb644c]/30 text-[#e6ded0]'
-                      : ''
-                  }`}
-                >
-                  {para}
-                </p>
-              );
-            })}
-
-            {/* Author sign-off credit */}
-            <div className="pt-2 text-end">
-              <span className="text-xs sm:text-sm font-bold text-[#eb644c] border-b border-[#eb644c]/40 pb-0.5 inline-block">
-                {essay.author}
-              </span>
-            </div>
+            {essay.paragraphs.slice(2).map((para, index) => (
+              <p
+                key={index}
+                className={`${fontClasses[fontSizeLevel]} text-[#e6ded0] text-justify font-normal`}
+              >
+                {para}
+              </p>
+            ))}
           </div>
 
           {/* Read More / Less Toggle Button */}
