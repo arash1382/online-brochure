@@ -16,7 +16,10 @@ export function isValidStandaloneBrochureHtml(html: string | null | undefined): 
     html.includes('id="standalone-offline-css"') &&
     html.includes('id="standalone-offline-js"') &&
     html.includes('id="root"') &&
-    html.includes('موسیقی نو در ایران')
+    html.includes('موسیقی نو در ایران') &&
+    html.includes('لادن خلیل\u200cنسب') &&
+    html.includes('آرش برائی\u200cنژاد') &&
+    html.includes('هلیا رضایی\u200cپور')
   );
 }
 

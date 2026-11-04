@@ -7,7 +7,7 @@ import {
 } from '../utils/offlineBrochureDownload';
 
 export const AcknowledgementsSection: React.FC = () => {
-  const { acknowledgements, specialThanks, links } = brochureData;
+  const { acknowledgements, links } = brochureData;
   const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
@@ -45,37 +45,20 @@ export const AcknowledgementsSection: React.FC = () => {
           {acknowledgements.intro}
         </p>
 
-        {/* Two Separate Content Cards Vertically Stacked */}
-        <div className="space-y-5 mb-10">
-          {/* Card 1: Existing organizations and individuals */}
-          <div className="bg-[#261c0b] border border-[#4d3a20] rounded-2xl p-5 sm:p-6 shadow-sm">
-            <div className="space-y-2.5 text-xs sm:text-sm">
-              {acknowledgements.list.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-3 rounded-lg bg-[#2d2212] border border-[#4d3a20]/60 flex flex-col gap-0.5"
-                >
-                  <span className="font-bold text-[#e6ded0]">{item.name}</span>
-                  {item.title ? (
-                    <span className="text-[11px] sm:text-xs text-[#b4a899]">{item.title}</span>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Card 2: New acknowledgement list (7 entries, each on its own line) */}
-          <div className="bg-[#261c0b] border border-[#4d3a20] rounded-2xl p-5 sm:p-6 shadow-sm">
-            <div className="space-y-2 text-xs sm:text-sm">
-              {specialThanks.map((name, idx) => (
-                <div
-                  key={idx}
-                  className="p-3 rounded-lg bg-[#2d2212] border border-[#4d3a20]/60"
-                >
-                  <span className="font-bold text-[#e6ded0] block">{name}</span>
-                </div>
-              ))}
-            </div>
+        {/* Acknowledgement Card: Organizations and individuals */}
+        <div className="bg-[#261c0b] border border-[#4d3a20] rounded-2xl p-5 sm:p-6 mb-10 shadow-sm">
+          <div className="space-y-2.5 text-xs sm:text-sm">
+            {acknowledgements.list.map((item, idx) => (
+              <div
+                key={idx}
+                className="p-3 rounded-lg bg-[#2d2212] border border-[#4d3a20]/60 flex flex-col gap-0.5"
+              >
+                <span className="font-bold text-[#e6ded0]">{item.name}</span>
+                {item.title ? (
+                  <span className="text-[11px] sm:text-xs text-[#b4a899]">{item.title}</span>
+                ) : null}
+              </div>
+            ))}
           </div>
         </div>
 

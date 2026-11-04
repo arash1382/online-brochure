@@ -65,52 +65,32 @@ export const CreditsSection: React.FC = () => {
                 id="emarat-ayandeh-content"
                 className="p-3.5 sm:p-4 border-t border-[#4d3a20]/60 space-y-2.5 sm:space-y-3"
               >
-                {emaratCredits.map((item, idx) => {
-                  const isDocFilm = item.role === 'فیلم اجرا و مستندنگاری';
-                  const personList =
-                    item.names && item.names.length > 0
-                      ? item.names
-                      : item.name
-                      ? item.name.split('،').map((s) => s.trim())
-                      : [];
-
-                  if (isDocFilm) {
-                    return (
-                      <div
-                        key={idx}
-                        className="p-3.5 sm:p-4 rounded-xl bg-[#261c0b] border border-[#4d3a20]/60 flex flex-col items-start gap-1 text-right w-full justify-center"
-                      >
-                        <span className="text-[#b4a899] text-[13px] sm:text-sm font-medium leading-[1.7] block text-right">
-                          {item.role}:
-                        </span>
-                        <span className="text-[#e6ded0] text-[13.5px] sm:text-sm font-semibold whitespace-nowrap break-keep text-right leading-[1.7]">
-                          {item.name}
-                        </span>
-                      </div>
-                    );
-                  }
-
-                  return (
-                    <div
-                      key={idx}
-                      className="p-3.5 sm:p-4 rounded-xl bg-[#261c0b] border border-[#4d3a20]/60 flex items-start justify-between gap-3 sm:gap-4"
-                    >
-                      <span className="text-[#b4a899] text-[13px] sm:text-sm font-medium shrink-0 leading-[1.7]">
-                        {item.role}:
-                      </span>
-                      <div className="flex flex-col items-end gap-1 text-end leading-[1.7] min-w-0">
-                        {personList.map((person, pIdx) => (
+                {emaratCredits.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3 sm:p-4 rounded-xl bg-[#261c0b] border border-[#4d3a20]/60 flex items-start justify-between gap-1.5 sm:gap-4"
+                  >
+                    <span className="text-[#b4a899] text-[13px] sm:text-sm font-medium shrink-0 leading-[1.7]">
+                      {item.role}:
+                    </span>
+                    <div className="flex flex-col items-end gap-1 text-end leading-[1.7] min-w-0">
+                      {item.names && item.names.length > 0 ? (
+                        item.names.map((person, pIdx) => (
                           <span
                             key={pIdx}
                             className="text-[#e6ded0] text-[13.5px] sm:text-sm font-semibold whitespace-nowrap break-keep"
                           >
                             {person}
                           </span>
-                        ))}
-                      </div>
+                        ))
+                      ) : (
+                        <span className="text-[#e6ded0] text-[13.5px] sm:text-sm font-semibold whitespace-nowrap break-keep">
+                          {item.name}
+                        </span>
+                      )}
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             )}
           </div>
