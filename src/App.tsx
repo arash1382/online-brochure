@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { HeaderNav } from './components/HeaderNav';
 import { HeroSection } from './components/HeroSection';
 import { EssaySection } from './components/EssaySection';
@@ -51,6 +52,9 @@ export default function App() {
 
       {/* Floating Back to Top Button */}
       <BackToTop />
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
